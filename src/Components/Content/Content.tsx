@@ -1,7 +1,8 @@
 import React from "react";
+import s from './Content.module.css'
 
 const Content = () => {
-    return <div className='content'>
+    return <div className={s.content}>
         <div>
         <img src='https://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg' alt='content image'/>
         </div>
@@ -14,13 +15,13 @@ const Content = () => {
             new post
             </div>
             <div>
-                <div>
+                <div className={s.item}>
                     post1
                 </div>
-                <div>
+                <div className={s.item}>
                     post2
                 </div>
-                <div>
+                <div className={s.item}>
                     post3
                 </div>
             </div>
