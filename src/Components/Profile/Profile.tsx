@@ -1,15 +1,11 @@
 import React from "react";
 import s from './Profile.module.css'
 import {MyPosts} from "./MyPosts/MyPosts";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 const Profile = () => {
     return <div>
-        <div>
-            <img src='https://lokeshdhakar.com/projects/lightbox2/images/image-3.jpg' alt='content image'/>
-        </div>
-        <div>
-            ava+descr
-        </div>
+        <ProfileInfo/>
         <MyPosts/>
     </div>
 }
