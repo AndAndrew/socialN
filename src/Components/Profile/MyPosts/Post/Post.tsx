@@ -1,12 +1,13 @@
 import React from "react";
 import s from './Post.module.css'
 
-type PostPropsType = {
+export type PostType = {
+    id: number,
     message: string,
-    likeCount: number
+    likesCount: number
 }
 
-export const Post = (props: PostPropsType) => {
+export const Post = (props: PostType) => {
     return (
         <div className={s.item}>
             <img
@@ -14,7 +15,7 @@ export const Post = (props: PostPropsType) => {
                 alt='avatar'/>
             {props.message}
             <div>
-                <span>likes</span> {props.likeCount}
+                <span>likes</span> {props.likesCount}
             </div>
         </div>
     )

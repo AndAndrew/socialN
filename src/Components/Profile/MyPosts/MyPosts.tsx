@@ -1,16 +1,10 @@
 import React from "react";
 import s from './MyPosts.module.css'
-import {Post} from "./Post/Post";
+import {Post, PostType} from "./Post/Post";
 
-export const MyPosts = () => {
+export const MyPosts = (props: {posts: Array<PostType>}) => {
 
-    let posts = [
-        {id: 1, message: "It's my first post", likesCount: 5},
-        {id: 2, message: "It's my second post", likesCount: 7},
-        {id: 3, message: "It's my third post", likesCount: 2},
-    ]
-
-    let postsElements = posts.map(post => <Post message={post.message} likeCount={post.likesCount}/>);
+    let postsElements = props.posts.map(post => <Post id={post.id} message={post.message} likesCount={post.likesCount}/>);
 
     return (
         <div className={s.postsBlock}>
