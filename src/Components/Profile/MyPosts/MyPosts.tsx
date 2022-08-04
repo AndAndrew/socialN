@@ -1,10 +1,12 @@
 import React from "react";
 import s from './MyPosts.module.css'
-import {Post, PostType} from "./Post/Post";
+import {MyPostsType} from "../../../Redux/state";
+import {Post} from "./Post/Post";
 
-export const MyPosts = (props: {posts: Array<PostType>}) => {
+export const MyPosts = (props: MyPostsType) => {
 
-    let postsElements = props.posts.map(post => <Post id={post.id} message={post.message} likesCount={post.likesCount}/>);
+    let postsElements = props.posts.map(post => <Post id={post.id} message={post.message}
+                                                      likesCount={post.likesCount}/>);
 
     return (
         <div className={s.postsBlock}>
@@ -18,7 +20,7 @@ export const MyPosts = (props: {posts: Array<PostType>}) => {
                 </div>
             </div>
             <div className={s.posts}>
-                { postsElements }
+                {postsElements}
             </div>
         </div>
     )
