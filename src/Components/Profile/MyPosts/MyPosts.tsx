@@ -5,7 +5,9 @@ import {Post} from "./Post/Post";
 
 type propsType = {
     posts: Array<PostType>,
+    newPostText: string,
     addPost: (postMessage: string) => void
+    updateNewPostText: (newText: string) => void
 }
 
 export const MyPosts = (props: propsType) => {
@@ -19,12 +21,20 @@ export const MyPosts = (props: propsType) => {
         props.addPost(text);
     }
 
+    const onChangeHandler = () => {
+        const text = newPostElement.current!.value;
+        props.updateNewPostText(text);
+    }
+
     return (
         <div className={s.postsBlock}>
             <h3>my posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}/>
+                    <textarea
+                        onChange={onChangeHandler}
+                        ref={newPostElement}
+                        value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
