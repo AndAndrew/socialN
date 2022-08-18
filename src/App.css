@@ -13,7 +13,7 @@
 }
 
 .app-wrapper-content {
-    height: 600px;
+    height: 700px;
     grid-area: c;
     background-color: cornflowerblue;
 }

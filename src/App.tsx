@@ -11,13 +11,15 @@ type stateType = {
     state: {
         profilePage: {
             posts: Array<PostType>
+            newPostText: string
         },
         dialogsPage: {
             dialogs: Array<DialogItemType>,
             messages: Array<MessageType>
         }
-    }
+    },
     addPost: (postMessage: string) => void,
+    updateNewPostText: (newText: string) => void
 }
 
 function App(props: stateType) {
@@ -28,8 +30,9 @@ function App(props: stateType) {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/Profile' render={() => <Profile
-                        state={props.state.profilePage}
-                        addPost={props.addPost}/>
+                        profilePage={props.state.profilePage}
+                        addPost={props.addPost}
+                        updateNewPostText={props.updateNewPostText}/>
                     }/>
                     <Route path='/Dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>
