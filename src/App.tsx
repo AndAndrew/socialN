@@ -17,6 +17,7 @@ type stateType = {
             messages: Array<MessageType>
         }
     }
+    addPost: (postMessage: string) => void,
 }
 
 function App(props: stateType) {
@@ -26,11 +27,10 @@ function App(props: stateType) {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    {/*<Route path='/Profile' component={Profile}/>*/
-                    } {/*<Route path='/Dialogs' component={Dialogs}/>*/
-                }
-
-                    <Route path='/Profile' render={() => <Profile state={props.state.profilePage}/>}/>
+                    <Route path='/Profile' render={() => <Profile
+                        state={props.state.profilePage}
+                        addPost={props.addPost}/>
+                    }/>
                     <Route path='/Dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>
             </div>
