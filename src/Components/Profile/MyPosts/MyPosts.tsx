@@ -21,8 +21,10 @@ export const MyPosts = (props: propsType) => {
     }
 
     const onChangeHandler = () => {
-        const text = newPostElement.current!.value;
-        props.updateNewPostText(text);
+        const text = newPostElement.current?.value;
+        if (text) {
+            props.updateNewPostText(text);
+        }
     }
 
     return (
