@@ -1,6 +1,6 @@
 import React, {useRef} from "react";
 import s from './MyPosts.module.css'
-import {PostType, state} from "../../../Redux/state";
+import {PostType} from "../../../Redux/state";
 import {Post} from "./Post/Post";
 
 type propsType = {
