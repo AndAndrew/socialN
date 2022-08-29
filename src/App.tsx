@@ -5,24 +5,15 @@ import Profile from "./Components/Profile/Profile";
 import Navbar from "./Components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
-import {DialogItemType, MessageType, PostType} from "./Redux/state";
+import {StateType} from "./Redux/state";
 
-type stateType = {
-    state: {
-        profilePage: {
-            posts: Array<PostType>
-            newPostText: string
-        },
-        dialogsPage: {
-            dialogs: Array<DialogItemType>,
-            messages: Array<MessageType>
-        }
-    },
+type PropsType = {
+    state: StateType,
     addPost: () => void,
     updateNewPostText: (newText: string) => void
 }
 
-function App(props: stateType) {
+function App(props: PropsType) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -38,8 +29,7 @@ function App(props: stateType) {
                 </div>
             </div>
         </BrowserRouter>
-    )
-        ;
+    );
 }
 
 export default App;

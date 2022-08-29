@@ -16,6 +16,7 @@ export const MyPosts = (props: propsType) => {
                                                       likesCount={post.likesCount}/>);
 
     const newPostElement = useRef<HTMLTextAreaElement | null>(null);
+
     const addPost = () => {
         props.addPost();
     }
