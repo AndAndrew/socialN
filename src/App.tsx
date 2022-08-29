@@ -18,7 +18,7 @@ type stateType = {
             messages: Array<MessageType>
         }
     },
-    addPost: (postMessage: string) => void,
+    addPost: () => void,
     updateNewPostText: (newText: string) => void
 }
 

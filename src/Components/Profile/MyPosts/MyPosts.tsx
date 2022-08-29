@@ -1,12 +1,12 @@
 import React, {useRef} from "react";
 import s from './MyPosts.module.css'
-import {PostType} from "../../../Redux/state";
+import {PostType, state} from "../../../Redux/state";
 import {Post} from "./Post/Post";
 
 type propsType = {
     posts: Array<PostType>,
     newPostText: string,
-    addPost: (postMessage: string) => void
+    addPost: () => void
     updateNewPostText: (newText: string) => void
 }
 
@@ -17,8 +17,7 @@ export const MyPosts = (props: propsType) => {
 
     const newPostElement = useRef<HTMLTextAreaElement | null>(null);
     const addPost = () => {
-        let text = newPostElement.current!.value;
-        props.addPost(text);
+        props.addPost();
     }
 
     const onChangeHandler = () => {

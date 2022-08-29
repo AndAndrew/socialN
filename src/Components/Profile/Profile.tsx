@@ -5,7 +5,7 @@ import {MyPostsType} from "../../Redux/state";
 
 type propsType = {
     profilePage: MyPostsType,
-    addPost: (postMessage: string) => void
+    addPost: () => void
     updateNewPostText: (newText: string) => void
 }
 
