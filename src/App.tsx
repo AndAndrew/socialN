@@ -5,15 +5,14 @@ import Profile from "./Components/Profile/Profile";
 import Navbar from "./Components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
-import {StateType} from "./Redux/state";
+import {StoreType} from "./Redux/state";
 
 type PropsType = {
-    state: StateType,
-    addPost: () => void,
-    updateNewPostText: (newText: string) => void
+    store: StoreType
 }
 
 function App(props: PropsType) {
+    const state = props.store.getState();
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -21,11 +20,10 @@ function App(props: PropsType) {
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Route path='/Profile' render={() => <Profile
-                        profilePage={props.state.profilePage}
-                        addPost={props.addPost}
-                        updateNewPostText={props.updateNewPostText}/>
+                        profilePage={state.profilePage}
+                        dispatch={props.store.dispatch.bind(props.store)}/>
                     }/>
-                    <Route path='/Dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                    <Route path='/Dialogs' render={() => <Dialogs state={state.dialogsPage}/>}/>
                 </div>
             </div>
         </BrowserRouter>
