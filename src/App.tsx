@@ -21,9 +21,12 @@ function App(props: PropsType) {
                 <div className='app-wrapper-content'>
                     <Route path='/Profile' render={() => <Profile
                         profilePage={state.profilePage}
-                        dispatch={props.store.dispatch.bind(props.store)}/>
-                    }/>
-                    <Route path='/Dialogs' render={() => <Dialogs state={state.dialogsPage}/>}/>
+                        dispatch={props.store.dispatch.bind(props.store)}
+                    />}/>
+                    <Route path='/Dialogs' render={() => <Dialogs
+                        state={state.dialogsPage}
+                        dispatch={props.store.dispatch.bind(props.store)}
+                    />}/>
                 </div>
             </div>
         </BrowserRouter>

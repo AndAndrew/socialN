@@ -23,7 +23,8 @@ export type StateType = {
     },
     dialogsPage: {
         dialogs: Array<DialogItemType>,
-        messages: Array<MessageType>
+        messages: Array<MessageType>,
+        newMessageBody: string
     }
 }
 
@@ -42,11 +43,24 @@ type UpdateNewPostTextActionType = {
     type: 'UPDATE-NEW-POST-TEXT',
     newText: string,
 }
+type SendMessageActionType = {
+    type: 'SEND_MESSAGE',
+}
+type UpdateNewMessageBodyActionType = {
+    type: 'UPDATE_NEW_MESSAGE_BODY',
+    body: string,
+}
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ActionsTypes =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | SendMessageActionType
+    | UpdateNewMessageBodyActionType
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
+const SEND_MESSAGE = 'SEND_MESSAGE'
 
 export const store: StoreType = {
     _state: {
@@ -76,7 +90,8 @@ export const store: StoreType = {
                 {id: 5, message: 'I\'m still learning'},
                 {id: 6, message: 'But the way will over'},
                 {id: 7, message: 'Ah, shit!'}
-            ]
+            ],
+            newMessageBody: ''
         }
     },
     _callSubscriber(store: StoreType) {
@@ -102,6 +117,14 @@ export const store: StoreType = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this)
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber(this);
+        } else if (action.type === SEND_MESSAGE) {
+            const body = this._state.dialogsPage.newMessageBody;
+            this._state.dialogsPage.newMessageBody = '';
+            this._state.dialogsPage.messages.push({id: 6, message: body})
+            this._callSubscriber(this);
         }
     }
 }
@@ -116,5 +139,18 @@ export const updateNewPostTextActionCreator = (text: string): UpdateNewPostTextA
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: text
+    }
+}
+
+export const sendMessageActionCreator = (): SendMessageActionType => {
+    return {
+        type: SEND_MESSAGE
+    }
+}
+
+export const updateNewMessageBodyActionCreator = (body: string): UpdateNewMessageBodyActionType => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY,
+        body: body
     }
 }
