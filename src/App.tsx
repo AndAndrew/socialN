@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {StoreType} from "./Redux/reduxStore";
+import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 
 type PropsType = {
     store: StoreType
@@ -23,7 +24,7 @@ function App(props: PropsType) {
                         profilePage={state.profilePage}
                         dispatch={props.store.dispatch.bind(props.store)}
                     />}/>
-                    <Route path='/Dialogs' render={() => <Dialogs
+                    <Route path='/Dialogs' render={() => <DialogsContainer
                         state={state.dialogsPage}
                         dispatch={props.store.dispatch.bind(props.store)}
                     />}/>

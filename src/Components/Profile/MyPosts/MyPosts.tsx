@@ -1,13 +1,13 @@
 import React, {useRef} from "react";
 import s from './MyPosts.module.css'
-import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../Redux/profileReducer";
 import {Post} from "./Post/Post";
-import {ActionsTypes, PostType} from "../../../Redux/store";
+import {PostType} from "../../../Redux/store";
 
 type propsType = {
     posts: Array<PostType>,
     newPostText: string,
-    dispatch: (action: ActionsTypes) => void
+    addPost: () => void,
+    updateNewPostText: (text: string) => void,
 }
 
 export const MyPosts = (props: propsType) => {
@@ -17,15 +17,16 @@ export const MyPosts = (props: propsType) => {
 
     const newPostElement = useRef<HTMLTextAreaElement | null>(null);
 
-    const addPost = () => {
-        props.dispatch(addPostActionCreator());
+    const onAddPost = () => {
+        props.addPost();
     }
 
     const onChangeHandler = () => {
         const text = newPostElement.current?.value;
         if (text) {
-            props.dispatch(updateNewPostTextActionCreator(text));
+            props.updateNewPostText(text)
         }
+        ;
     }
 
     return (
@@ -39,7 +40,7 @@ export const MyPosts = (props: propsType) => {
                         value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>

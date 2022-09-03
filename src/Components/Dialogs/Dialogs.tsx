@@ -1,36 +1,29 @@
 import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css';
-import {
-    ActionsTypes,
-    DialogItemType,
-    MessageType
-} from "../../Redux/store";
 import {DialogItem} from "./DialogItems/DialogItem";
 import {Message} from "./Message/Message";
-import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../Redux/dialogsReducer";
+import {DialogsPageType} from "../../Redux/dialogsReducer";
 
 type PropsType = {
-    state: {
-        dialogs: Array<DialogItemType>,
-        messages: Array<MessageType>,
-        newMessageBody: string
-    },
-    dispatch: (action: ActionsTypes) => void
+    dialogsPage: DialogsPageType,
+    updateNewMessageBody: (body: string) => void,
+    sendMessage: () => void,
 }
 
 export const Dialogs = (props: PropsType) => {
 
-    let messagesElements = props.state.messages.map(message => <Message message={message.message} id={message.id}/>);
-    let dialogsElements = props.state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>);
-    const newMessageBody = props.state.newMessageBody;
+    let messagesElements = props.dialogsPage.messages.map(message => <Message message={message.message}
+                                                                              id={message.id}/>);
+    let dialogsElements = props.dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>);
+    const newMessageBody = props.dialogsPage.newMessageBody;
 
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
 
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const body = e.currentTarget.value;
-        props.dispatch(updateNewMessageBodyActionCreator(body))
+        props.updateNewMessageBody(body)
     }
 
     return (

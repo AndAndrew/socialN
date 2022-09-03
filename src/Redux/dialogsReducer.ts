@@ -3,7 +3,7 @@ import {DialogItemType, MessageType} from "./store";
 const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 const SEND_MESSAGE = 'SEND_MESSAGE'
 
-type StateType = {
+export type DialogsPageType = {
     dialogs: Array<DialogItemType>,
     messages: Array<MessageType>,
     newMessageBody: string
@@ -35,7 +35,7 @@ const initialState = {
     newMessageBody: ''
 };
 
-export const dialogsReducer = (state: StateType = initialState, action: MessageActionTypes) => {
+export const dialogsReducer = (state: DialogsPageType = initialState, action: MessageActionTypes) => {
 
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
