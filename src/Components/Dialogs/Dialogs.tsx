@@ -3,12 +3,11 @@ import s from './Dialogs.module.css';
 import {
     ActionsTypes,
     DialogItemType,
-    MessageType,
-    sendMessageActionCreator,
-    updateNewMessageBodyActionCreator
+    MessageType
 } from "../../Redux/state";
 import {DialogItem} from "./DialogItems/DialogItem";
 import {Message} from "./Message/Message";
+import {sendMessageActionCreator, updateNewMessageBodyActionCreator} from "../../Redux/dialogsReducer";
 
 type PropsType = {
     state: {
