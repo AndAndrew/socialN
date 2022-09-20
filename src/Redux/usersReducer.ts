@@ -4,9 +4,13 @@ const SET_USERS = 'SET-USERS' as const;
 
 export type UserType = {
     id: string,
+    photos: {
+        small: string,
+        large: string
+    }
     photoURL: string,
     followed: boolean,
-    fullName: string,
+    name: string,
     status: string,
     location: {
         city: string,
@@ -24,24 +28,24 @@ export type UsersActionTypes = followACType
 
 const initialState = {
     users: [
-        {
-            id: '1',
-            photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
-            followed: false, fullName: "Andrew", status: "I'm developer", location: {city: "Samara", country: "Russia"}
-        },
-        {
-            id: '2',
-            photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
-            followed: false, fullName: "Alexander", status: "ah, shit!", location: {city: "Moscow", country: "Russia"}
-        },
-        {
-            id: '3',
-            photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
-            followed: true,
-            fullName: "Artem",
-            status: "London is the capital of Great Britain",
-            location: {city: "St.Petersberg", country: "Russia"}
-        },
+        // {
+        //     id: '1',
+        //     photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
+        //     followed: false, fullName: "Andrew", status: "I'm developer", location: {city: "Samara", country: "Russia"}
+        // },
+        // {
+        //     id: '2',
+        //     photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
+        //     followed: false, fullName: "Alexander", status: "ah, shit!", location: {city: "Moscow", country: "Russia"}
+        // },
+        // {
+        //     id: '3',
+        //     photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
+        //     followed: true,
+        //     fullName: "Artem",
+        //     status: "London is the capital of Great Britain",
+        //     location: {city: "St.Petersberg", country: "Russia"}
+        // },
         // {id: 4,
         // photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
         // followed: true, fullName: "Kate", status: "I'm so tired", location: {city: "Samara", country: "Russia"}},
