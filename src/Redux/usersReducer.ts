@@ -3,6 +3,7 @@ const UNFOLLOW = 'UNFOLLOW' as const;
 const SET_USERS = 'SET-USERS' as const;
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE' as const;
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT' as const;
+const TOGGLE_ISFETCHING = 'TOGGLE-ISFETCHING' as const;
 
 
 export type UserType = {
@@ -28,11 +29,14 @@ type unfollowACType = ReturnType<typeof unfollowAC>
 type setUsersACType = ReturnType<typeof setUsersAC>
 type setCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
-export type UsersActionTypes = followACType
-    | unfollowACType | setUsersACType | setCurrentPageACType | setTotalUsersCountACType
+type toggleIsFetchingACType = ReturnType<typeof toggleIsFetchingAC>
+
+export type UsersActionTypes = followACType | unfollowACType
+    | setUsersACType | setCurrentPageACType
+    | setTotalUsersCountACType | toggleIsFetchingACType
 
 const initialState = {
-    users: [
+    users: <Array<UserType>>[
         // {
         //     id: '1',
         //     photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
@@ -54,10 +58,11 @@ const initialState = {
         // {id: 4,
         // photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
         // followed: true, fullName: "Kate", status: "I'm so tired", location: {city: "Samara", country: "Russia"}},
-        ] as Array<UserType>,
+        ],
     pageSize: 5,
     totalUserCount: 0,
-    currentPage: 2
+    currentPage: 2,
+    isFetching: false
 };
 
 export const usersReducer = (state: usersPageType = initialState, action: UsersActionTypes): usersPageType => {
@@ -79,6 +84,8 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersA
             return {...state, currentPage: action.payload.currentPage};
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUserCount: action.payload.totalUsersCount};
+        case TOGGLE_ISFETCHING:
+            return {...state, isFetching: action.payload.isFetching};
         default:
             return state;
     }
@@ -125,6 +132,15 @@ export const setTotalUsersCountAC = (totalUsersCount: number) => {
         type: SET_TOTAL_USERS_COUNT,
         payload: {
             totalUsersCount
+        }
+    }
+}
+
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_ISFETCHING,
+        payload: {
+            isFetching
         }
     }
 }
