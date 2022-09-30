@@ -3,7 +3,8 @@ const UNFOLLOW = 'UNFOLLOW' as const;
 const SET_USERS = 'SET-USERS' as const;
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE' as const;
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT' as const;
-const TOGGLE_ISFETCHING = 'TOGGLE-ISFETCHING' as const;
+const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING' as const;
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE-IS-FETCHING-PROGRESS' as const;
 
 
 export type UserType = {
@@ -30,10 +31,12 @@ type setUsersACType = ReturnType<typeof setUsers>
 type setCurrentPageACType = ReturnType<typeof setCurrentPage>
 type setTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>
 type toggleIsFetchingACType = ReturnType<typeof toggleIsFetching>
+type toggleFollowingProgressACType = ReturnType<typeof toggleFollowingProgress>
 
 export type UsersActionTypes = followACType | unfollowACType
     | setUsersACType | setCurrentPageACType
     | setTotalUsersCountACType | toggleIsFetchingACType
+    | toggleFollowingProgressACType
 
 const initialState = {
     users: <Array<UserType>>[
@@ -62,7 +65,8 @@ const initialState = {
     pageSize: 5,
     totalUserCount: 0,
     currentPage: 2,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: <Array<string>>[]
 };
 
 export const usersReducer = (state: usersPageType = initialState, action: UsersActionTypes): usersPageType => {
@@ -84,8 +88,14 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersA
             return {...state, currentPage: action.payload.currentPage};
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUserCount: action.payload.totalUsersCount};
-        case TOGGLE_ISFETCHING:
+        case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.payload.isFetching};
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {...state,
+            followingInProgress: action.payload.isFetching
+                ? [...state.followingInProgress, action.payload.userId]
+                : state.followingInProgress.filter(id => id != action.payload.userId)
+            }
         default:
             return state;
     }
@@ -138,9 +148,19 @@ export const setTotalUsersCount = (totalUsersCount: number) => {
 
 export const toggleIsFetching = (isFetching: boolean) => {
     return {
-        type: TOGGLE_ISFETCHING,
+        type: TOGGLE_IS_FETCHING,
         payload: {
             isFetching
+        }
+    }
+}
+
+export const toggleFollowingProgress = (isFetching: boolean, userId: string) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
+        payload: {
+            isFetching,
+            userId
         }
     }
 }
