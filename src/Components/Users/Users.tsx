@@ -3,7 +3,7 @@ import photo from "../../Assets/Images/user.png";
 import React from "react";
 import {UserType} from "../../Redux/usersReducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersAPI} from "../../API/api";
 
 type PropsType = {
     totalUsersCount: number,
@@ -44,24 +44,14 @@ export const Users = (props: PropsType) => {
                     <div>
                         {user.followed
                             ? <button onClick={() => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '8f1da31f-2ec3-4f0d-8757-bcc4266dd215'
-                                    },
-                                }).then(response => {
+                                usersAPI.follow(user.id).then(response => {
                                     if (response.data.resultCode === 0) {
                                         props.unfollow(user.id);
                                     }
                                 });
                             }}>unfollow</button>
                             : <button onClick={() => {
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-                                    withCredentials: true,
-                                    headers: {
-                                        'API-KEY': '8f1da31f-2ec3-4f0d-8757-bcc4266dd215'
-                                    },
-                                }).then(response => {
+                                usersAPI.unfollow(user.id).then(response => {
                                     if (response.data.resultCode === 0) {
                                         props.follow(user.id);
                                     }
