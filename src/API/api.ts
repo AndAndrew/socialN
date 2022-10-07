@@ -14,25 +14,20 @@ export const usersAPI = {
             withCredentials: true,
         }).then(response => response.data)
     },
-
     follow(id: string) {
+        return instance.post(`follow/${id}`);
+    },
+    unfollow(id: string) {
         return instance.delete(`follow/${id}`);
     },
-
-    unfollow(id: string) {
-        return instance.post(`follow/${id}`);
+    getProfile(userId: string) {
+        return instance.get(`profile/${userId}`);
     }
 }
 
 export const authAPI = {
-    getAuthMe() {
-        return instance('auth/me');
-    }
-}
-
-export const profileAPI = {
-    getUserProfile(userId: string) {
-        return instance.get(`profile/${userId}`);
+    me() {
+        return instance.get('auth/me');
     }
 }
 
