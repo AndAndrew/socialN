@@ -25,6 +25,14 @@ export class ProfileStatus extends Component<any> {
         });
     }
 
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<{}>) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            });
+        }
+    }
+
     render() {
         return (
             <div>
