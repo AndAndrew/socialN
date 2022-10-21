@@ -3,12 +3,14 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
 type PropsType = {
-    profile: any
+    profile: any,
+    status: string,
+    updateStatus: (status: string) => void
 }
 
 const Profile = (props: PropsType) => {
     return <div>
-        <ProfileInfo profile={props.profile}/>
+        <ProfileInfo profile={props.profile} status={props.status} updateStatus={props.updateStatus}/>
         <MyPostsContainer/>
     </div>
 }
