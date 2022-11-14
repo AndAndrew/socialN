@@ -1,22 +1,17 @@
-
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 const SEND_MESSAGE = 'SEND_MESSAGE'
 
 export type DialogItemType = {
     name: string,
     id: number
 }
-
 export type MessageType = {
     id: number,
     message: string
 }
-
 export type DialogsPageType = typeof initialState
 
 type SendMessageActionType = ReturnType<typeof sendMessageActionCreator>
-type UpdateNewMessageBodyActionType = ReturnType<typeof updateNewMessageBodyActionCreator>
-type MessageActionTypes = SendMessageActionType | UpdateNewMessageBodyActionType
+type MessageActionTypes = SendMessageActionType
 
 const initialState = {
     dialogs: [
@@ -36,23 +31,16 @@ const initialState = {
         {id: 5, message: 'I\'m still learning'},
         {id: 6, message: 'But the way will over'},
         {id: 7, message: 'Ah, shit!'}
-    ] as Array<MessageType>,
-    newMessageBody: ''
+    ] as Array<MessageType>
 };
 
 export const dialogsReducer = (state: DialogsPageType = initialState, action: MessageActionTypes): DialogsPageType => {
 
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            };
         case SEND_MESSAGE:
-            const body = state.newMessageBody;
+            const body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, {id: 6, message: body}]
             };
         default:
@@ -60,15 +48,9 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Me
     }
 }
 
-export const sendMessageActionCreator = () => {
+export const sendMessageActionCreator = (newMessageBody: string) => {
     return {
-        type: SEND_MESSAGE
-    } as const
-}
-
-export const updateNewMessageBodyActionCreator = (body: string) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_BODY,
-        body: body
+        type: SEND_MESSAGE,
+        newMessageBody: newMessageBody
     } as const
 }
