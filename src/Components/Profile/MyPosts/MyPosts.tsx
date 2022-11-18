@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "./Post/Post";
 import {ProfilePropsType} from "./MyPostsContainer";
@@ -10,8 +10,6 @@ export const MyPosts = (props: ProfilePropsType) => {
 
     let postsElements = props.profilePage.posts.map(post => <Post id={post.id} message={post.message}
                                                                   likesCount={post.likesCount}/>);
-
-    const newPostElement = useRef<HTMLTextAreaElement | null>(null);
 
     const onAddPost = (values: FormDataType) => {
         props.addPost(values.newPostText);
@@ -38,7 +36,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field name='newPostText' component={Textarea}
-            validate={[requiredField, maxLength10]}/>
+                   validate={[requiredField, maxLength10]}/>
         </div>
         <div>
             <button>Add post</button>

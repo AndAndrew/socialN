@@ -3,7 +3,6 @@ import s from './Dialogs.module.css';
 import {DialogItem} from "./DialogItems/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../Common/FormsControls/FormsControls";
 import {maxLengthCreator, requiredField} from "../../Utils/Validators/Validators";
@@ -20,8 +19,6 @@ export const Dialogs = (props: DialogsPropsType) => {
     const addNewMessage = (values: FormDataType) => {
         props.sendMessage(values.newMessageBody)
     }
-
-    if (props.isAuth) return <Redirect to={'/login'}/>;
 
     return (
         <div className={s.dialogs}>

@@ -47,7 +47,6 @@ export const dialogsReducer = (state: DialogsPageType = initialState, action: Me
             return state;
     }
 }
-
 export const sendMessageActionCreator = (newMessageBody: string) => {
     return {
         type: SEND_MESSAGE,
