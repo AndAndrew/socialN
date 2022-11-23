@@ -3,16 +3,15 @@ import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA' as const;
 
-
 type AuthType = typeof initialState
 
 type setUserDataACType = ReturnType<typeof setAuthUserData>
 type AuthActionTypes = setUserDataACType
 
 const initialState = {
-    userId: <string | null>null,
-    email: <string | null>null,
-    login: <string | null>null,
+    userId: null as string | null,
+    email: null as string | null,
+    login: null as string | null,
     isAuth: false
 };
 

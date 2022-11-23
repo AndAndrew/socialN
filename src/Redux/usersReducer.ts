@@ -23,7 +23,6 @@ export type UserType = {
         country: string
     }
 }
-
 export type usersPageType = typeof initialState
 
 type followACType = ReturnType<typeof followSuccess>
@@ -40,7 +39,7 @@ export type UsersActionTypes = followACType | unfollowACType
     | toggleFollowingProgressACType
 
 const initialState = {
-    users: <Array<UserType>>[
+    users: [
         // {
         //     id: '1',
         //     photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
@@ -62,12 +61,12 @@ const initialState = {
         // {id: 4,
         // photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWH4wT9bBqKNfbAghGhseZngde-a_wQhPQw&usqp=CAU",
         // followed: true, fullName: "Kate", status: "I'm so tired", location: {city: "Samara", country: "Russia"}},
-    ],
+    ] as Array<UserType>,
     pageSize: 5,
     totalUserCount: 0,
     currentPage: 2,
     isFetching: false,
-    followingInProgress: <Array<string>>[]
+    followingInProgress: [] as Array<string>
 };
 
 export const usersReducer = (state: usersPageType = initialState, action: UsersActionTypes): usersPageType => {
@@ -96,7 +95,7 @@ export const usersReducer = (state: usersPageType = initialState, action: UsersA
                 ...state,
                 followingInProgress: action.payload.isFetching
                     ? [...state.followingInProgress, action.payload.userId]
-                    : state.followingInProgress.filter(id => id != action.payload.userId)
+                    : state.followingInProgress.filter(id => id !== action.payload.userId)
             }
         default:
             return state;

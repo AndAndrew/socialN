@@ -16,29 +16,28 @@ type PropsType = {
 }
 
 export const Users = (props: PropsType) => {
-    {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
+    }
 
-        let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++) {
-            pages.push(i);
-        }
-
-        return <div>
-            <div>
-                {pages.map(p => {
-                    return <span key={p} className={props.currentPage === p ? s.selectedPage : ''}
-                                 onClick={(e) => {
-                                     props.onPageClick(p)
-                                 }}>{p}</span>
-                })}
-            </div>
-            {
-                props.users.map(user => <div key={user.id}>
+    return <div>
+        <div>
+            {pages.map(p => {
+                return <span key={p} className={props.currentPage === p ? s.selectedPage : ''}
+                             onClick={() => {
+                                 props.onPageClick(p)
+                             }}>{p}</span>
+            })}
+        </div>
+        {
+            props.users.map(user => <div key={user.id}>
                 <span>
                     <div>
                         <NavLink to={'/profile/' + user.id}>
-                        <img src={user.photos.small != null ? user.photos.small : photo} className={s.userPhoto}/>
+                        <img src={user.photos.small != null ? user.photos.small : photo} className={s.userPhoto}
+                             alt={'avatar'}/>
                         </NavLink>
                     </div>
                     <div>
@@ -57,16 +56,15 @@ export const Users = (props: PropsType) => {
                         }
                     </div>
                 </span>
-                    <span>
+                <span>
                     <div>{user.name}</div>
                     <div>{user.status}</div>
                 </span>
-                    <span>
+                <span>
                     <div>{'user.location.country'}</div>
                     <div>{'user.location.city'}</div>
                 </span>
-                </div>)
-            }
-        </div>
-    }
+            </div>)
+        }
+    </div>
 }
