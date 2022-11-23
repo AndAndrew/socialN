@@ -8,9 +8,10 @@ import {Textarea} from "../../Common/FormsControls/FormsControls";
 
 export const MyPosts = (props: ProfilePropsType) => {
 
-    let postsElements = props.profilePage.posts.map(post => <Post id={post.id} message={post.message}
+    let postsElements = props.profilePage.posts.map(post => <Post key={post.id}
+                                                                  id={post.id}
+                                                                  message={post.message}
                                                                   likesCount={post.likesCount}/>);
-
     const onAddPost = (values: FormDataType) => {
         props.addPost(values.newPostText);
     }
